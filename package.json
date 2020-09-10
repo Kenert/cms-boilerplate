@@ -2,9 +2,7 @@
     "name": "cms-boilerplate",
     "version": "1.0.0",
     "description": "Boilerplate template for CMS theme development",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "scripts": {},
     "author": "Kenert Kulu <kenertkulu@gmail.com>",
     "license": "MIT"
 }
