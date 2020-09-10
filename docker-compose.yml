@@ -12,4 +12,4 @@ services:
             WORDPRESS_DB_PASSWORD: wp
             WORDPRESS_DB_NAME: wp
         volumes:
-            - ./:/var/www/html/wp-content/themes/rwd
+            - ./theme/:/var/www/html/wp-content/themes/rwd
