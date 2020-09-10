@@ -3,6 +3,8 @@
     "version": "1.0.0",
     "description": "Boilerplate template for CMS theme development",
     "scripts": {
+        "dcu": "docker-compose up -d",
+        "dcd": "docker-compose down",
         "dev": "webpack --mode=development --config=webpack.dev.js",
         "prod": "webpack --mode=production --config=webpack.prod.js"
     },
