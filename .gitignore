@@ -1,2 +1,8 @@
+# Folders
 node_modules/
+uploads/
+.vscode/
+
+# Files
+.DS_Store
 .env
