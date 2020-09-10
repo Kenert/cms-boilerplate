@@ -2,7 +2,10 @@
     "name": "cms-boilerplate",
     "version": "1.0.0",
     "description": "Boilerplate template for CMS theme development",
-    "scripts": {},
+    "scripts": {
+        "dev": "webpack --mode=development --config=webpack.dev.js",
+        "prod": "webpack --mode=production --config=webpack.prod.js"
+    },
     "author": "Kenert Kulu <kenertkulu@gmail.com>",
     "license": "MIT",
     "devDependencies": {
