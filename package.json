@@ -5,8 +5,8 @@
     "scripts": {
         "dcu": "docker-compose up -d",
         "dcd": "docker-compose down",
-        "dev": "webpack --mode=development --config=webpack.dev.js",
-        "prod": "webpack --mode=production --config=webpack.prod.js"
+        "dev": "gulp",
+        "build": "gulp build"
     },
     "author": "Kenert Kulu <kenertkulu@gmail.com>",
     "license": "MIT",
@@ -15,17 +15,17 @@
         "@babel/preset-env": "^7.11.5",
         "autoprefixer": "^9.8.6",
         "babel-loader": "^8.1.0",
-        "css-loader": "^4.3.0",
+        "browser-sync": "^2.26.12",
         "eslint": "^7.8.1",
         "eslint-loader": "^4.0.2",
-        "friendly-errors-webpack-plugin": "^1.7.0",
-        "mini-css-extract-plugin": "^0.11.1",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^7.0.1",
+        "gulp-concat": "^2.6.1",
+        "gulp-sass": "^4.1.0",
+        "gulp-sourcemaps": "^2.6.5",
         "node-sass": "^4.14.1",
-        "postcss-loader": "^4.0.1",
-        "sass-loader": "^10.0.2",
         "webpack": "^4.44.1",
-        "webpack-cli": "^3.3.12",
-        "webpack-merge": "^5.1.4"
+        "webpack-stream": "^6.1.0"
     },
     "dependencies": {}
 }
