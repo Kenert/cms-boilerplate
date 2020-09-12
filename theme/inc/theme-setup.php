@@ -1,7 +1,5 @@
 <?php
 
-$sss = 'test';
-
 function ct_support() {
     /*
      * Enable support for Post Thumbnails on posts and pages.
@@ -30,45 +28,41 @@ add_action('after_setup_theme', 'ct_support');
  * @return string development|production
  */
 function ct_get_env() {
-    $env = 'production';
-
-    $urlparts = parse_url(home_url());
-    $domain   = $urlparts['host'];
-
-    if (strpos($domain, 'rwd.ee') !== false) {
+    if (defined('WP_DEBUG') && WP_DEBUG === true) {
         $env = 'development';
+    } else {
+        $env = 'production';
     }
-
     return $env;
 }
 
 /**
- * Registers bundled CSS file based on env
+ * Registers main CSS file based on env
  *
  * @return void
  */
 function ct_enqueue_styles() {
     $theme_version = wp_get_theme()->get('Version');
     if (ct_get_env() === 'development') {
-        wp_enqueue_style('bundle', get_template_directory_uri() . '/dist/bundle.css', [], $theme_version, 'all');
+        wp_enqueue_style('main', get_template_directory_uri() . '/assets/dist/main.css', [], $theme_version, 'all');
     } else {
-        wp_enqueue_style('bundle', get_template_directory_uri() . '/dist/bundle.min.css', [], $theme_version, 'all');
+        wp_enqueue_style('main', get_template_directory_uri() . '/assets/dist/main.min.css', [], $theme_version, 'all');
     }
 }
 
 add_action('wp_enqueue_scripts', 'ct_enqueue_styles');
 
 /**
- * Registers bundled JS file based on env
+ * Registers main JS file based on env
  *
  * @return void
  */
 function ct_enqueue_scripts() {
     $theme_version = wp_get_theme()->get('Version');
     if (ct_get_env() === 'development') {
-        wp_enqueue_script('bundle', get_template_directory_uri() . '/dist/bundle.min.js', [], $theme_version, true);
+        wp_enqueue_script('main', get_template_directory_uri() . '/assets/dist/main.js', [], $theme_version, true);
     } else {
-        wp_enqueue_script('bundle', get_template_directory_uri() . '/dist/bundle.js', [], $theme_version, true);
+        wp_enqueue_script('main', get_template_directory_uri() . '/assets/dist/main.min.js', [], $theme_version, true);
     }
 }
 
