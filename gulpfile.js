@@ -110,7 +110,7 @@ const compileFiles = (
 ) => {
     let fileStreamPromises = [];
     filenames.forEach((filename) => {
-        const singleFileStreamPromise = new Promise((resolve, reject) => {
+        const singleFileStreamPromise = new Promise((resolve) => {
             const source = `${srcdir}${filename}.${srcext}`;
             const target =
                 env === 'production'
