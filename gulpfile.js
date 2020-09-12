@@ -30,7 +30,7 @@ const config = {
  * @param  {String} source Source glob (file) to be processed
  * @param  {String} target Output name of the file
  * @param  {String} destination Directory to output the files to
- * @param  {Function} callback Callback when streams are completed
+ * @param  {Function} callback runs when streams are completed
  * @returns {Void} Void
  */
 const processSass = (env, source, target, destination, callback) => {
@@ -60,7 +60,7 @@ const processSass = (env, source, target, destination, callback) => {
  * @param  {String} source Source glob (file) to be processed
  * @param  {String} target Output name of the file
  * @param  {String} destination Directory to output the files to
- * @param  {Function} callback Callback when streams are completed
+ * @param  {Function} callback runs when streams are completed
  * @returns {void} Void
  */
 const processJs = (env, source, target, destination, callback) => {
