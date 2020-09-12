@@ -85,6 +85,7 @@ const processJs = (env, source, target, destination, callback) => {
     src(`${source}`)
         .pipe(webpack(webpackConfig, compiler))
         .pipe(dest(destination))
+        .pipe(browserSync.stream())
         .on('finish', callback);
 };
 
