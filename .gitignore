@@ -2,7 +2,7 @@
 node_modules/
 uploads/
 .vscode/
-theme/dist/
+theme/assets/dist/
 
 # Files
 .DS_Store
