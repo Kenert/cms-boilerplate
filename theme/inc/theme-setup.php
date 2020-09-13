@@ -61,11 +61,11 @@ function ct_get_enqueue_filepath($filename, $type) {
 }
 
 /**
- * Enqueues style and script files to be loaded in
+ * Enqueues style and script assets to be loaded in
  *
  * @return Void
  */
-function ct_enqueue_files() {
+function ct_enqueue_assets() {
     $theme_version = wp_get_theme()->get('Version');
 
     /* style.css is only used for metadata */
@@ -76,21 +76,21 @@ function ct_enqueue_files() {
     wp_enqueue_script('main', ct_get_enqueue_filepath('main', 'script'), [], $theme_version, true);
 }
 
-add_action('wp_enqueue_scripts', 'ct_enqueue_files');
+add_action('wp_enqueue_scripts', 'ct_enqueue_assets');
 
 /**
  * Loads blocks(.min).js for Gutenberg
  *
  * @return Void
  */
-function ct_enqueue_editor_files() {
+function ct_enqueue_editor_assets() {
     $theme_version = wp_get_theme()->get('Version');
 
     wp_enqueue_script('blocks', ct_get_enqueue_filepath('blocks', 'script'), [], $theme_version, true);
 
 }
 
-add_action('enqueue_block_editor_assets', 'ct_enqueue_editor_scripts');
+add_action('enqueue_block_editor_assets', 'ct_enqueue_editor_assets');
 
 /**
  * Registers custom Gutenberg block types

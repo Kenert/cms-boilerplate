@@ -99,7 +99,7 @@ const processJs = (env, source, target, destination, callback) => {
  * @param  {String} destination Destination to output the files to
  * @returns {Promise} Returns a promise that resolves when all files have been processed
  */
-const compileFiles = (
+const compileAssets = (
     env,
     filenames,
     srcdir,
@@ -126,7 +126,7 @@ const compileFiles = (
 /* ---------------------------------- SCSS/JS tasks --------------------------------- */
 
 const compileStylesMinimal = () =>
-    compileFiles(
+    compileAssets(
         'development',
         config.sassfiles,
         config.sassdir,
@@ -136,7 +136,7 @@ const compileStylesMinimal = () =>
         config.distdir
     );
 const compileStylesFull = () =>
-    compileFiles(
+    compileAssets(
         'production',
         config.sassfiles,
         config.sassdir,
@@ -146,7 +146,7 @@ const compileStylesFull = () =>
         config.distdir
     );
 const compileScriptsMinimal = () =>
-    compileFiles(
+    compileAssets(
         'development',
         config.jsfiles,
         config.jsdir,
@@ -156,7 +156,7 @@ const compileScriptsMinimal = () =>
         config.distdir
     );
 const compileScriptsFull = () =>
-    compileFiles(
+    compileAssets(
         'production',
         config.jsfiles,
         config.jsdir,
