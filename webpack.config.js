@@ -14,9 +14,6 @@ const webpackBaseConfig = {
         errorDetails: false,
         warnings: false,
         publicPath: false
-    },
-    externals: {
-        'wp.blocks': 'wp.blocks'
     }
 };
 
