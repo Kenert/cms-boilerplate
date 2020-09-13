@@ -37,7 +37,20 @@ function ct_get_env() {
 }
 
 /**
- * Registers main CSS file based on env
+ * Enqueues the main stylesheet
+ *
+ * @return void
+ */
+function ct_enqueue_main_stylesheet() {
+    if (is_admin()) {
+        wp_enqueue_style('style', get_stylesheet_uri());
+    }
+}
+
+add_action('wp_enqueue_scripts', 'ct_enqueue_main_stylesheet');
+
+/**
+ * Enqueues main CSS file based on env
  *
  * @return void
  */
@@ -53,7 +66,7 @@ function ct_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'ct_enqueue_styles');
 
 /**
- * Registers main JS file based on env
+ * Enqueues main JS file based on env
  *
  * @return void
  */
