@@ -20,7 +20,7 @@ const config = {
     sassdir: 'src/sass/',
     sassfiles: ['main'],
     jsdir: 'src/js/',
-    jsfiles: ['main']
+    jsfiles: ['main', 'blocks']
 };
 
 /* ---------------------------- Processing logic ---------------------------- */
