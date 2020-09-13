@@ -85,7 +85,6 @@ const processJs = (env, source, target, destination, callback) => {
     src(`${source}`)
         .pipe(webpack(webpackConfig, compiler))
         .pipe(dest(destination))
-        .pipe(browserSync.stream())
         .on('finish', callback);
 };
 
@@ -182,8 +181,11 @@ const initBrowserSync = (callback) => {
 
 const initWatchers = () => {
     watch('theme/**/*.php').on('change', browserSync.reload);
-    watch('src/sass/**/*.scss').on('change', series(compileStylesMinimal));
-    watch('src/js/**/*.js').on('change', series(compileScriptsMinimal));
+    watch('src/sass/**/*.scss').on('change', compileStylesMinimal);
+    watch(['src/js/**/*.js', 'src/js/**/*.jsx']).on(
+        'change',
+        series(compileScriptsMinimal, browserSync.reload)
+    );
 };
 
 /* --------------------------------- Exports -------------------------------- */
