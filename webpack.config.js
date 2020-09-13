@@ -14,6 +14,9 @@ const webpackBaseConfig = {
         errorDetails: false,
         warnings: false,
         publicPath: false
+    },
+    externals: {
+        'wp.blocks': 'wp.blocks'
     }
 };
 
@@ -23,9 +26,17 @@ const webpackDevConfig = {
     module: {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.jsx?$/,
                 exclude: /(node_modules)/,
-                use: ['eslint-loader']
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            envName: 'development',
+                            presets: ['@babel/preset-react']
+                        }
+                    }
+                ]
             }
         ]
     }
@@ -36,16 +47,19 @@ const webpackProdConfig = {
     module: {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.jsx?$/,
                 exclude: /(node_modules)/,
                 use: [
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['@babel/preset-env']
+                            envName: 'production',
+                            presets: [
+                                '@babel/preset-env',
+                                '@babel/preset-react'
+                            ]
                         }
-                    },
-                    'eslint-loader'
+                    }
                 ]
             }
         ]
