@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Theme optional functionality calls
+ *
+ * @return Void
+ */
 function ct_support() {
     /*
      * Enable support for Post Thumbnails on posts and pages.
@@ -25,7 +30,7 @@ add_action('after_setup_theme', 'ct_support');
 /**
  * Get current environment
  *
- * @return string development|production
+ * @return String development | production
  */
 function ct_get_env() {
     if (defined('WP_DEBUG') && WP_DEBUG === true) {
@@ -37,57 +42,63 @@ function ct_get_env() {
 }
 
 /**
- * Enqueues the main stylesheet
+ * Gets the filepath for enqueue functions based on env
  *
- * @return void
+ * @param String $filename Name of the file without extension
+ * @param String $type style | script
+ * @return Void
  */
-function ct_enqueue_main_stylesheet() {
-    if (is_admin()) {
-        wp_enqueue_style('style', get_stylesheet_uri());
-    }
-}
+function ct_get_enqueue_filepath($filename, $type) {
+    $asset_path = '/assets/dist/';
 
-add_action('wp_enqueue_scripts', 'ct_enqueue_main_stylesheet');
-
-/**
- * Enqueues main CSS file based on env
- *
- * @return void
- */
-function ct_enqueue_styles() {
-    $theme_version = wp_get_theme()->get('Version');
-    if (ct_get_env() === 'development') {
-        wp_enqueue_style('main', get_template_directory_uri() . '/assets/dist/main.css', [], $theme_version, 'all');
+    if (ct_get_env() === 'production') {
+        $extension = $type === 'style' ? '.min.css' : '.min.js';
     } else {
-        wp_enqueue_style('main', get_template_directory_uri() . '/assets/dist/main.min.css', [], $theme_version, 'all');
+        $extension = $type === 'style' ? '.css' : '.js';
     }
+
+    return get_template_directory_uri() . $asset_path . $filename . $extension;
 }
 
-add_action('wp_enqueue_scripts', 'ct_enqueue_styles');
-
 /**
- * Enqueues main JS file based on env
+ * Enqueues style and script files to be loaded in
  *
- * @return void
+ * @return Void
  */
-function ct_enqueue_scripts() {
+function ct_enqueue_files() {
     $theme_version = wp_get_theme()->get('Version');
-    if (ct_get_env() === 'development') {
-        wp_enqueue_script('main', get_template_directory_uri() . '/assets/dist/main.js', [], $theme_version, true);
-    } else {
-        wp_enqueue_script('main', get_template_directory_uri() . '/assets/dist/main.min.js', [], $theme_version, true);
-    }
+
+    /* style.css is only used for metadata */
+    wp_enqueue_style('style', get_stylesheet_uri());
+
+    /* Loads main(.min).js and main(.min).css */
+    wp_enqueue_style('main', ct_get_enqueue_filepath('main', 'style'), [], $theme_version, 'all');
+    wp_enqueue_script('main', ct_get_enqueue_filepath('main', 'script'), [], $theme_version, true);
 }
 
-add_action('wp_enqueue_scripts', 'ct_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'ct_enqueue_files');
 
 /**
- * Dequeues default styles
+ * Loads blocks(.min).js for Gutenberg
  *
- * @return void
+ * @return Void
  */
-function ct_dequeue_styles() {
-    wp_dequeue_style('wp-block-library');
+function ct_enqueue_editor_files() {
+    $theme_version = wp_get_theme()->get('Version');
+
+    wp_enqueue_script('blocks', ct_get_enqueue_filepath('blocks', 'script'), [], $theme_version, true);
+
 }
 
-// add_action('wp_enqueue_scripts', 'ct_dequeue_styles');
+add_action('enqueue_block_editor_assets', 'ct_enqueue_editor_scripts');
+
+/**
+ * Registers custom Gutenberg block types
+ *
+ * @return Void
+ */
+function ct_register_block_types() {
+    register_block_type('rwd/example');
+}
+
+add_action('init', 'ct_register_block_types');
