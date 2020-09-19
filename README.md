@@ -14,20 +14,20 @@ This is a boilerplate theme development template for WordPress or Joomla.
 
 `npm run build` runs Gulp with the **build** task. This is production mode. Code is minified/transpiled and sourcemaps are not generated.
 
-`npm run formatJs` runs Prettier and formats JS files recursively in src/js/.
+`npm run format` runs Prettier and formats JS/SASS files recursively in src/.
 
-`npm run formatSass` runs Prettier and formats SASS files recursively in src/sass/.
+`npm run mkcert:generate` calls mkcert to generate self-signed trusted certificates to properly use an SSL connection in local development. The certificates are used by Docker and BrowserSync. More on how to setup and use mkcert here: https://github.com/FiloSottile/mkcert. Before running `npm run mkcert:generate` you must have ran `mkcert -install` at least once.
 
 Excerpt from package.json
 
         "dcu": "docker-compose up -d",
         "dcd": "docker-compose down",
-        "predev:watch": "npm run formatJs && npm run formatSass",
+        "predev:watch": "npm run format",
         "dev:watch": "gulp devWatch",
         "build": "gulp build",
         "dev:build": "gulp dev",
-        "formatJs": "prettier --write src/js/**/*.js",
-        "formatSass": "prettier --write src/sass/**/*.scss"
+        "format": "prettier --write src/**/*.{js,jsx,scss}",
+        "mkcert:generate": "mkcert -key-file certs/dev.key -cert-file certs/dev.crt domain.tld localhost"
 
 ## Docker Environment Variables
 

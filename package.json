@@ -10,8 +10,7 @@
         "build": "gulp build",
         "dev:build": "gulp dev",
         "format": "prettier --write src/**/*.{js,jsx,scss}",
-        "mkcert:install": "mkcert -install",
-        "mkcert:generate": "mkcert -key-file docker/dev.key -cert-file docker/dev.crt domain.tld localhost"
+        "mkcert:generate": "mkcert -key-file certs/dev.key -cert-file certs/dev.crt domain.tld localhost"
     },
     "author": "Kenert Kulu <kenertkulu@gmail.com>",
     "license": "MIT",
