@@ -5,12 +5,13 @@
     "scripts": {
         "dcu": "docker-compose up -d",
         "dcd": "docker-compose down",
-        "predev:watch": "npm run formatJs && npm run formatSass",
+        "predev:watch": "npm run format",
         "dev:watch": "gulp devWatch",
         "build": "gulp build",
         "dev:build": "gulp dev",
-        "formatJs": "prettier --write src/js/**/*.js",
-        "formatSass": "prettier --write src/scss/**/*.scss"
+        "format": "prettier --write src/**/*.{js,jsx,scss}",
+        "mkcert:install": "mkcert -install",
+        "mkcert:generate": "mkcert -key-file docker/dev.key -cert-file docker/dev.crt domain.tld localhost"
     },
     "author": "Kenert Kulu <kenertkulu@gmail.com>",
     "license": "MIT",
