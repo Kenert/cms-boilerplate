@@ -49,7 +49,8 @@ function ct_get_env() {
  * @return Void
  */
 function ct_get_enqueue_filepath($filename, $type) {
-    $asset_path = '/assets/dist/';
+    
+    $asset_path = $type === 'style' ? '/assets/css/' : '/assets/js/';
 
     if (ct_get_env() === 'production') {
         $extension = $type === 'style' ? '.min.css' : '.min.js';
