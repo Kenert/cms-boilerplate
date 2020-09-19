@@ -2,14 +2,15 @@ version: '3'
 
 services:
     wp:
-        image: wordpress:5.5.1-php7.3-apache
+        build: .
         ports:
             - 80:80
+            - 443:443
         restart: always
         env_file: .env
         volumes:
             - ./theme/:/var/www/html/wp-content/themes/theme/
-            - ./uploads/:/var/www/html/wp-content/uploads/
+            - ./wp-content/uploads/:/var/www/html/wp-content/uploads/
         networks:
             - wpsite
 
