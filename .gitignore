@@ -4,6 +4,7 @@ uploads/
 .vscode/
 theme/assets/js/
 theme/assets/css/
+certs/
 
 # Files
 .DS_Store
