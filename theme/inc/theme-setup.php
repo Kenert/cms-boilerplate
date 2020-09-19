@@ -49,7 +49,7 @@ function ct_get_env() {
  * @return Void
  */
 function ct_get_enqueue_filepath($filename, $type) {
-    
+
     $asset_path = $type === 'style' ? '/assets/css/' : '/assets/js/';
 
     if (ct_get_env() === 'production') {
@@ -70,7 +70,9 @@ function ct_enqueue_assets() {
     $theme_version = wp_get_theme()->get('Version');
 
     /* style.css is only used for metadata */
-    wp_enqueue_style('style', get_stylesheet_uri());
+    if (is_admin()) {
+        wp_enqueue_style('style', get_stylesheet_uri());
+    }
 
     /* Loads main(.min).js and main(.min).css */
     wp_enqueue_style('main', ct_get_enqueue_filepath('main', 'style'), [], $theme_version, 'all');
@@ -103,3 +105,20 @@ function ct_register_block_types() {
 }
 
 add_action('init', 'ct_register_block_types');
+
+/**
+ * Removes assets from being loaded
+ *
+ * @return Void
+ */
+function ct_remove_assets() {
+    wp_deregister_script('wp-embed');
+}
+
+add_action('wp_footer', 'ct_remove_assets');
+
+/* Removes emoji related assets */
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('admin_print_styles', 'print_emoji_styles');
