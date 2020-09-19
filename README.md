@@ -1,6 +1,8 @@
 # CMS Boilerplate with Docker
 
-This is a boilerplate theme development template for WordPress or Joomla.
+This is a boilerplate theme development template for WordPress or Joomla. Before running any commands.
+
+NB! Before launching the Docker containers or running any commands, make sure you have mkcert setup (https://github.com/FiloSottile/mkcert). This is a required step.
 
 ## Scripts
 
