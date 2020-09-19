@@ -7,11 +7,7 @@ const webpack = require('webpack-stream');
 const compiler = require('webpack');
 const browserSync = require('browser-sync').create();
 
-const {
-    webpackBaseConfig,
-    webpackDevConfig,
-    webpackProdConfig
-} = require('./webpack.config');
+const { webpackBaseConfig, webpackDevConfig, webpackProdConfig } = require('./webpack.config');
 
 /* ----------------------- Define global config object ---------------------- */
 
@@ -43,9 +39,7 @@ const config = {
 const processSass = (env, source, target, destination, callback) => {
     if (env === 'production') {
         src(source)
-            .pipe(
-                sass({ outputStyle: 'compressed' }).on('error', sass.logError)
-            )
+            .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
             .pipe(autoprefixer())
             .pipe(concat(target))
             .pipe(dest(destination))
@@ -105,23 +99,13 @@ const processJs = (env, source, target, destination, callback) => {
  * @param  {String} destination Destination to output the files to
  * @returns {Promise} Returns a promise that resolves when all files have been processed
  */
-const compileAssets = (
-    env,
-    filenames,
-    srcdir,
-    processor,
-    srcext,
-    targetext,
-    destination
-) => {
+const compileAssets = (env, filenames, srcdir, processor, srcext, targetext, destination) => {
     let fileStreamPromises = [];
     filenames.forEach((filename) => {
         const singleFileStreamPromise = new Promise((resolve) => {
             const source = `${srcdir}${filename}.${srcext}`;
             const target =
-                env === 'production'
-                    ? `${filename}.min.${targetext}`
-                    : `${filename}.${targetext}`;
+                env === 'production' ? `${filename}.min.${targetext}` : `${filename}.${targetext}`;
             return processor(env, source, target, destination, resolve);
         });
         fileStreamPromises.push(singleFileStreamPromise);
@@ -197,10 +181,11 @@ const initWatchers = () => {
 
 /* --------------------------------- Exports -------------------------------- */
 
-exports.default = series(
+exports.devWatch = series(
     compileStylesMinimal,
     compileScriptsMinimal,
     initBrowserSync,
     initWatchers
 );
 exports.build = series(compileStylesFull, compileScriptsFull);
+exports.dev = series(compileStylesMinimal, compileScriptsMinimal);
