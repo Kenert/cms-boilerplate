@@ -16,11 +16,18 @@ const {
 /* ----------------------- Define global config object ---------------------- */
 
 const config = {
-    distdir: 'theme/assets/dist/',
-    sassdir: 'src/sass/',
-    sassfiles: ['main'],
-    jsdir: 'src/js/',
-    jsfiles: ['main', 'blocks']
+    distdir: {
+        js: 'theme/assets/js/',
+        sass: 'theme/assets/css/'
+    },
+    src: {
+        sass: 'src/sass/',
+        js: 'src/js/'
+    },
+    files: {
+        sass: ['main'],
+        js: ['main', 'blocks']
+    }
 };
 
 /* ---------------------------- Processing logic ---------------------------- */
@@ -127,42 +134,42 @@ const compileAssets = (
 const compileStylesMinimal = () =>
     compileAssets(
         'development',
-        config.sassfiles,
-        config.sassdir,
+        config.files.sass,
+        config.src.sass,
         processSass,
         'scss',
         'css',
-        config.distdir
+        config.distdir.sass
     );
 const compileStylesFull = () =>
     compileAssets(
         'production',
-        config.sassfiles,
-        config.sassdir,
+        config.files.sass,
+        config.src.sass,
         processSass,
         'scss',
         'css',
-        config.distdir
+        config.distdir.sass
     );
 const compileScriptsMinimal = () =>
     compileAssets(
         'development',
-        config.jsfiles,
-        config.jsdir,
+        config.files.js,
+        config.src.js,
         processJs,
         'js',
         'js',
-        config.distdir
+        config.distdir.js
     );
 const compileScriptsFull = () =>
     compileAssets(
         'production',
-        config.jsfiles,
-        config.jsdir,
+        config.files.js,
+        config.src.js,
         processJs,
         'js',
         'js',
-        config.distdir
+        config.distdir.js
     );
 
 /* ------------------------------- Other tasks ------------------------------ */
