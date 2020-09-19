@@ -162,9 +162,13 @@ const initBrowserSync = (callback) => {
     browserSync.init(
         {
             open: false,
-            proxy: 'http://diplomaatia.rwd.ee',
+            proxy: 'https://domain.tld',
             port: 1000,
-            ui: false
+            ui: false,
+            https: {
+                key: "certs/dev.key",
+                cert: "certs/dev.crt"
+            }
         },
         callback
     );
