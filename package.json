@@ -5,8 +5,12 @@
     "scripts": {
         "dcu": "docker-compose up -d",
         "dcd": "docker-compose down",
-        "dev": "gulp",
-        "build": "gulp build"
+        "predev:watch": "npm run formatJs && npm run formatSass",
+        "dev:watch": "gulp devWatch",
+        "build": "gulp build",
+        "dev:build": "gulp dev",
+        "formatJs": "prettier --write src/js/**/*.js",
+        "formatSass": "prettier --write src/scss/**/*.scss"
     },
     "author": "Kenert Kulu <kenertkulu@gmail.com>",
     "license": "MIT",
@@ -22,6 +26,7 @@
         "gulp-sass": "^4.1.0",
         "gulp-sourcemaps": "^2.6.5",
         "node-sass": "^4.14.1",
+        "prettier": "^2.1.2",
         "webpack": "^4.44.1",
         "webpack-stream": "^6.1.0"
     },
